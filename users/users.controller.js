@@ -5,10 +5,11 @@ const validateRequest = require('_middleware/validate-request');
 const Role = require('_helpers/role');
 const userService = require('./user.service');
 
+
 router.get('/', getAll);
-router.get('/:id', userService.getbyID);
-router.post('/', createSchema, userService.create);
-router.put('/:id', updateSchema, userService.update);
+router.get('/:id', getByID);
+router.post('/', createSchema, create);
+router.put('/:id', updateSchema, update);
 router.delete('/:id', _delete);
 
 module.exports = router;
@@ -19,8 +20,8 @@ function getAll(req, res, next) {
         .catch(next);
 }
 
-function getbyID(req, res, next) {
-    userService.getbyID(req.params.id)
+function getByID(req, res, next) {
+    userService.getByID(req.params.id)
         .then(user => res.json(user))
         .catch(next);
 }
